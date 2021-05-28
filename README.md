@@ -1,7 +1,5 @@
 TODO
 -----
-- create CRUD interface for customers + mock impl
-- create CRUD interface for notes + mock impl
 - create unit tests for both services 
 - import javalin libs and create rest endpoints
 - create integration tests for rest api
@@ -20,6 +18,9 @@ Next planning to build a thin slice through all layers first, including tests, i
 After that implement remaining functionality, complete a feature at a time.
 
 API entity classes are immutable.
+
+ContactDetails class has a single field for address for simplicity. Normally I'd assume separate fields for city, country, postcode etc are desirable for filtering and/or analytics purposes.
+
 
 
 Optional
