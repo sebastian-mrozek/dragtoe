@@ -1,6 +1,5 @@
 TODO
 -----
-- define API entities
 - create CRUD interface for customers + mock impl
 - create CRUD interface for notes + mock impl
 - create unit tests for both services 
@@ -20,3 +19,11 @@ Planning to start with creating mocks and basic scaffolding for the app.
 Next planning to build a thin slice through all layers first, including tests, i.e.: single endpoint for adding customers only. 
 After that implement remaining functionality, complete a feature at a time.
 
+API entity classes are immutable.
+
+
+Optional
+-----
+The following might be applicable depending on project size and domain complexity. They might not provide useful for smaller domains that don't change often.
+- Use Lombok for API classes to reduce boilerplate code (getters, setters, constructors etc).
+- Define REST API using OpenAPI and generate API classes and endpoints (can generate java rest client etc).
