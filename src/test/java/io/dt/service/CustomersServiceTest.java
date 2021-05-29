@@ -3,7 +3,7 @@ package io.dt.service;
 import io.dt.api.ContactDetails;
 import io.dt.api.Customer;
 import io.dt.api.Status;
-import io.dt.service.api.ICustomersService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,7 +15,13 @@ public class CustomersServiceTest {
     public static final String TWITTER_HANDLE = "realryannz";
     public static final String PHONE_NUMBER = "0123345566";
     public static final String ADDRESS = "Proper St. 1, Auckland, NZ";
-    ICustomersService service = new CustomersService();
+
+    CustomersServiceWithDelete service = new CustomersServiceWithDelete();
+
+    @BeforeEach
+    public void reset() {
+        service.deleteAll();
+    }
 
     @Test
     public void testAdd() {

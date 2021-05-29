@@ -1,6 +1,5 @@
 TODO
 -----
-- implement add/list customers APIs - define persistence models - import ebean
 - import javalin libs and create rest endpoints for add/list customers API
 - create integration tests for rest api for add/list api (import jackson and annotate api)
 - use jib to generate docker image

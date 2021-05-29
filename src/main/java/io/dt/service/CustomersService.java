@@ -4,29 +4,44 @@ package io.dt.service;
 import io.dt.api.ContactDetails;
 import io.dt.api.Customer;
 import io.dt.api.Status;
+import io.dt.mapper.CustomerMapper;
 import io.dt.service.api.ICustomersService;
+import io.dt.service.db.DCustomer;
+import io.dt.service.db.query.QDCustomer;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CustomersService implements ICustomersService {
+
+    CustomerMapper mapper = new CustomerMapper();
+
     @Override
-    public Customer add(String nickName, ContactDetails contactDetails) {
+    final public Customer add(String nickName, ContactDetails contactDetails) {
+        DCustomer dCustomer = new DCustomer(null, nickName, mapper.apiToDb(contactDetails), new Date(), Status.PROSPECTIVE);
+        dCustomer.save();
+        return mapper.dbToApi(dCustomer);
+    }
+
+    @Override
+    final public List<Customer> getAll() {
+        return new QDCustomer()
+                .fetch("contactDetails")
+                .findList()
+                .stream()
+                .map(mapper::dbToApi)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    final public Customer getById(UUID id) {
         return null;
     }
 
     @Override
-    public List<Customer> getAll() {
-        return null;
-    }
-
-    @Override
-    public Customer getById(UUID id) {
-        return null;
-    }
-
-    @Override
-    public void updateStatus(UUID id, Status status) {
+    final public void updateStatus(UUID id, Status status) {
 
     }
 }

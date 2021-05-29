@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <createTable name="dcustomer" identityType="external" pkName="pk_dcustomer">
+            <column name="id" type="uuid" primaryKey="true" identity="true"/>
+            <column name="nick_name" type="varchar"/>
+            <column name="address" type="varchar"/>
+            <column name="phone_number" type="varchar"/>
+            <column name="twitter_handle" type="varchar"/>
+            <column name="status" type="integer" checkConstraint="check ( status in (0,1,2))" checkConstraintName="ck_dcustomer_status"/>
+            <column name="creation_date_time" type="timestamp" notnull="true"/>
+        </createTable>
+    </changeSet>
+</migration>
