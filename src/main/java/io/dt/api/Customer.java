@@ -1,6 +1,7 @@
 package io.dt.api;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Customer {
@@ -36,5 +37,18 @@ public class Customer {
 
     public Status getStatus() {
         return status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return id.equals(customer.id) && nickName.equals(customer.nickName) && contactDetails.equals(customer.contactDetails) && creationDateTime.equals(customer.creationDateTime) && status == customer.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nickName, contactDetails, creationDateTime, status);
     }
 }

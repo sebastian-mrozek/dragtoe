@@ -1,12 +1,14 @@
 TODO
 -----
-- create unit tests for both services 
-- import javalin libs and create rest endpoints
-- create integration tests for rest api
-- implement customers and notes services - define persistence models - import ebean
-- implement rest endpoints
-- add hash for notes to showcase model upgrade - use it for optimistic locking when updating notes
+- implement add/list customers APIs - define persistence models - import ebean
+- import javalin libs and create rest endpoints for add/list customers API
+- create integration tests for rest api for add/list api (import jackson and annotate api)
+- use jib to generate docker image
 - craft docker-compose with the app and postgres, configure
+- create unit tests for remaining customer service APIs
+- create unit tests for notes service API
+- implement remaining rest endpoints
+- add versioning for notes (maybe updated timestamp?) to showcase model upgrade - use it for optimistic locking when updating notes
 - review logging
 - review configuration
 - add metrics - explain options
@@ -18,6 +20,7 @@ Next planning to build a thin slice through all layers first, including tests, i
 After that implement remaining functionality, complete a feature at a time.
 
 API entity classes are immutable.
+All fields are assumed to be required.
 
 ContactDetails class has a single field for address for simplicity. Normally I'd assume separate fields for city, country, postcode etc are desirable for filtering and/or analytics purposes.
 
