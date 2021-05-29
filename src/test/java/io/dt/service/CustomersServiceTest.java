@@ -3,7 +3,7 @@ package io.dt.service;
 import io.dt.api.ContactDetails;
 import io.dt.api.Customer;
 import io.dt.api.Status;
-import io.dt.api.service.ICustomersService;
+import io.dt.service.api.ICustomersService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

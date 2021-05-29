@@ -1,4 +1,4 @@
-package io.dt.api.service;
+package io.dt.service.api;
 
 import io.dt.api.Note;
 

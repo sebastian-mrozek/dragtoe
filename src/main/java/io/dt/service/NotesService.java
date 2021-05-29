@@ -1,7 +1,7 @@
 package io.dt.service;
 
 import io.dt.api.Note;
-import io.dt.api.service.INotesService;
+import io.dt.service.api.INotesService;
 
 import java.util.List;
 import java.util.UUID;
