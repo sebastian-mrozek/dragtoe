@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'idea'
     id 'io.ebean' version '12.6.6'
 }
 
@@ -12,6 +13,8 @@ repositories {
 
 dependencies {
     annotationProcessor "io.ebean:querybean-generator:$v_ebean"
+    annotationProcessor "io.avaje:avaje-inject-generator:$v_avaje_inject"
+    annotationProcessor "io.avaje:avaje-http-javalin-generator:$v_avaje_http"
 
     implementation "io.ebean:ebean:$v_ebean"
     implementation "io.ebean:ebean-querybean:$v_ebean"
@@ -20,6 +23,9 @@ dependencies {
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$v_jackson"
     implementation "org.postgresql:postgresql:42.2.20"
     implementation "ch.qos.logback:logback-classic:$v_logback"
+    implementation "io.javalin:javalin:$v_javalin"
+    implementation "io.avaje:avaje-inject:$v_avaje_inject"
+    implementation "io.avaje:avaje-http-api:$v_avaje_http"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testImplementation "org.assertj:assertj-core:3.19.0"

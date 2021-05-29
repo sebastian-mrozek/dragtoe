@@ -1,5 +1,8 @@
 package io.dt.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -11,7 +14,13 @@ public class Customer {
     private final Date creationDateTime;
     private final Status status;
 
-    public Customer(UUID id, String nickName, ContactDetails contactDetails, Date creationDateTime, Status status) {
+    @JsonCreator
+    public Customer(
+            @JsonProperty("id") UUID id,
+            @JsonProperty("nickName") String nickName,
+            @JsonProperty("contactDetails") ContactDetails contactDetails,
+            @JsonProperty("creationDateTime") Date creationDateTime,
+            @JsonProperty("status") Status status) {
         this.id = id;
         this.nickName = nickName;
         this.contactDetails = contactDetails;

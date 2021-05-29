@@ -1,5 +1,8 @@
 package io.dt.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class ContactDetails {
@@ -7,7 +10,11 @@ public class ContactDetails {
     private final String phoneNumber;
     private final String twitterHandle;
 
-    public ContactDetails(String address, String phoneNumber, String twitterHandle) {
+    @JsonCreator
+    public ContactDetails(
+            @JsonProperty("address") String address,
+            @JsonProperty("phoneNumber") String phoneNumber,
+            @JsonProperty("twitterHandle") String twitterHandle) {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.twitterHandle = twitterHandle;
