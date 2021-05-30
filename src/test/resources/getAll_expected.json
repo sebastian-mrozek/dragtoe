@@ -1,0 +1,20 @@
+[
+  {
+    "nickName": "Seb",
+    "contactDetails": {
+      "address": "Someplace, Somecity",
+      "phoneNumber": "1223443214321",
+      "twitterHandle": "realSeb123"
+    },
+    "status": "PROSPECTIVE"
+  },
+  {
+    "nickName": "Ann",
+    "contactDetails": {
+      "address": "Somewhere, Auckland",
+      "phoneNumber": "+99 81717 222",
+      "twitterHandle": "annaProper"
+    },
+    "status": "PROSPECTIVE"
+  }
+]

@@ -1,6 +1,7 @@
 TODO
 =====
-- create integration tests for rest api for add/list api (import jackson and annotate api)
+- implement create/getall endpoints
+- write mapper tests
 - use jib to generate docker image
 - craft docker-compose with the app and postgres, configure
 - create unit tests for remaining customer service APIs
