@@ -3,10 +3,14 @@ package io.dt.web;
 import io.dt.api.Customer;
 import io.dt.util.TestClient;
 import io.dt.util.TestUtil;
+import io.ebean.test.Json;
 import io.javalin.plugin.json.JavalinJson;
 import kong.unirest.HttpResponse;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class CustomersEndpointTest {
 
@@ -22,10 +26,11 @@ public class CustomersEndpointTest {
 
     @Test
     public void testGetAll() {
-        testClient.postResource("getAll_new-customer-1.json");
-        testClient.postResource("getAll_new-customer-2.json");
+        Customer customer1 = JavalinJson.fromJson(testClient.postResource("getAll_new-customer-1.json").getBody(), Customer.class);
+        Customer customer2 = JavalinJson.fromJson(testClient.postResource("getAll_new-customer-2.json").getBody(), Customer.class);
         HttpResponse<String> response = testClient.get();
-        TestUtil.assertResponse(response, 200, "getAll_expected.json");
+        List<Customer> actualCustomers = Json.readList(Customer.class, response.getBody());
+        Assertions.assertThat(actualCustomers).contains(customer1, customer2);
     }
 
     @Test
@@ -36,7 +41,6 @@ public class CustomersEndpointTest {
 
         HttpResponse<String> getResponse = testClient.get(newCustomer.getId().toString());
         TestUtil.assertResponse(getResponse, 200, "createCustomer_expected.json");
-
     }
 
 }

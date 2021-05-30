@@ -2,6 +2,7 @@ package io.dt.service;
 
 import io.dt.api.ContactDetails;
 import io.dt.api.Customer;
+import io.dt.api.NewCustomer;
 import io.dt.api.Status;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ public class CustomersServiceTest {
 
     @Test
     public void testAdd() {
-        Customer customer = service.add("Ryan", mockContactDetails());
+        Customer customer = service.add(new NewCustomer("Ryan", mockContactDetails()));
         assertThat(customer).describedAs("Expected non-null reference return when adding new customer").isNotNull();
         assertThat(customer.getId()).describedAs("id").isNotNull();
         assertThat(customer.getNickName()).describedAs("nick name").isEqualTo("Ryan");
@@ -43,8 +44,8 @@ public class CustomersServiceTest {
 
     @Test
     public void testGetAll() {
-        Customer andy = service.add("Andy", mockContactDetails());
-        Customer tom = service.add("Tom", mockContactDetails());
+        Customer andy = service.add(new NewCustomer("Andy", mockContactDetails()));
+        Customer tom = service.add(new NewCustomer("Tom", mockContactDetails()));
 
         List<Customer> actual = service.getAll();
 

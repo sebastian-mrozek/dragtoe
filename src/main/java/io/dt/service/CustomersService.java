@@ -1,8 +1,8 @@
 package io.dt.service;
 
 
-import io.dt.api.ContactDetails;
 import io.dt.api.Customer;
+import io.dt.api.NewCustomer;
 import io.dt.api.Status;
 import io.dt.mapper.CustomerMapper;
 import io.dt.service.api.ICustomersService;
@@ -19,8 +19,13 @@ public class CustomersService implements ICustomersService {
     CustomerMapper mapper = new CustomerMapper();
 
     @Override
-    final public Customer add(String nickName, ContactDetails contactDetails) {
-        DCustomer dCustomer = new DCustomer(null, nickName, mapper.apiToDb(contactDetails), new Date(), Status.PROSPECTIVE);
+    final public Customer add(NewCustomer newCustomer) {
+        DCustomer dCustomer = new DCustomer(
+                null,
+                newCustomer.getNickName(),
+                mapper.apiToDb(newCustomer.getContactDetails()),
+                new Date(),
+                Status.PROSPECTIVE);
         dCustomer.save();
         return mapper.dbToApi(dCustomer);
     }
@@ -37,7 +42,11 @@ public class CustomersService implements ICustomersService {
 
     @Override
     final public Customer getById(UUID id) {
-        return null;
+        DCustomer customer = new QDCustomer().id.eq(id).findOne();
+        if (customer == null) {
+            return null;
+        }
+        return mapper.dbToApi(customer);
     }
 
     @Override

@@ -1,6 +1,5 @@
 TODO
 =====
-- implement create/getall endpoints
 - write mapper tests
 - use jib to generate docker image
 - craft docker-compose with the app and postgres, configure
