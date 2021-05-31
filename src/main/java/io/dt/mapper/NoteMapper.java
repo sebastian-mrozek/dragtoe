@@ -8,10 +8,10 @@ import java.util.UUID;
 public class NoteMapper {
 
     public Note dbToApi(DNote dNote) {
-        return new Note(dNote.id, dNote.text);
+        return new Note(dNote.id, dNote.text, dNote.version);
     }
 
     public DNote apiToDb(UUID customerId, Note note) {
-        return new DNote(customerId, note.getId(), note.getText());
+        return new DNote(customerId, note.getId(), note.getText(), note.getVersion());
     }
 }

@@ -10,13 +10,16 @@ public class Note {
 
     private final UUID id;
     private final String text;
+    private final long version;
 
     @JsonCreator
     public Note(
             @JsonProperty("id") UUID id,
-            @JsonProperty("text") String text) {
+            @JsonProperty("text") String text,
+            @JsonProperty("version") long version) {
         this.id = id;
         this.text = text;
+        this.version = version;
     }
 
     public UUID getId() {
@@ -27,16 +30,20 @@ public class Note {
         return text;
     }
 
+    public long getVersion() {
+        return version;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Note note = (Note) o;
-        return id.equals(note.id) && text.equals(note.text);
+        return version == note.version && id.equals(note.id) && text.equals(note.text);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, text);
+        return Objects.hash(id, text, version);
     }
 }
