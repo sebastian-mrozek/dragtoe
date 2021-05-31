@@ -1,0 +1,8 @@
+ebean:
+  migration:
+    run: true
+datasource:
+  db:
+    username: ${DB_USER:sa}
+    password: ${DB_PASS:sa}
+    url: ${DB_URL:jdbc:h2:./db/dragtoe}

@@ -1,7 +1,6 @@
 TODO
 =====
 - write mapper tests
-- use jib to generate docker image
 - craft docker-compose with the app and postgres, configure
 - create unit tests for remaining customer service APIs
 - create unit tests for notes service API
@@ -42,3 +41,4 @@ The following might be applicable depending on project size and domain complexit
 - Define REST API using OpenAPI and generate API classes and endpoints (can generate java rest client etc).
 - Use MapStruct for mapping
 - Persistence - eBean has support for storing data as JSON string or jsonb (for jsonb, querying support is provided too). This potentially simplifies persistence layer, if API classes are simply persisted as JSON objects. The consequences are that the API entities are now same as the persistence model, this could cause problems with evolving the data.
+- Maybe enable paging on the 'list' API, depending on use cases.
