@@ -13,7 +13,7 @@ public class GenerateDbMigration {
     public static void main(String[] args) throws IOException {
 
         DbMigration dbMigration = DbMigration.create();
-        dbMigration.setPlatform(Platform.POSTGRES);
+        dbMigration.setPlatform(Platform.H2);
         dbMigration.setPathToResources("src/main/resources");
 
         dbMigration.generateMigration();
