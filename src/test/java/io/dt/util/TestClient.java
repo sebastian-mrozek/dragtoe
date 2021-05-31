@@ -14,7 +14,15 @@ public class TestClient {
 
     public HttpResponse<String> postResource(String resourceName) {
         String content = Json.readResource("/" + resourceName);
+        return postText(content);
+    }
+
+    public HttpResponse<String> postText(String content) {
         return Unirest.post(apiBaseUrl).body(content).asString();
+    }
+
+    public HttpResponse<String> putText(String path, String content) {
+        return Unirest.put(apiBaseUrl + path).body(content).asString();
     }
 
     public HttpResponse<String> get(String path) {

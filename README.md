@@ -1,8 +1,5 @@
 TODO
 =====
-- create unit tests for notes service API
-- create integration tests for notes service API
-- implement notes api
 - add versioning for notes (maybe updated timestamp?) to showcase model upgrade - use it for optimistic locking when updating notes
 - enable filtering on 'getAll'
 - write mapper tests
@@ -21,12 +18,14 @@ All fields are assumed to be required.
 
 ContactDetails class has a single field for address for simplicity. Normally I'd assume separate fields for city, country, postcode etc are desirable for filtering and/or analytics purposes.
 
+PUT vs PATCH semantics: PUT is for replacing the resource, PATCH is better for partial updates.
+
 Persistence
 ---
 eBean features used:
 - db migration,
 - generated query beans for easy querying,
-- eBean-test provides ability to run unit tests against Postgres in a docker container. This can be changed to use in memory H2 if the build does not support launching containers.
+- eBean-test provides ability to run unit tests against Postgres in a docker container. This can be changed to use in memory H2 if the build does not support launching containers. Bottom line: the web app can be tested in production-like environment during build time.
 
 Web app
 ---
