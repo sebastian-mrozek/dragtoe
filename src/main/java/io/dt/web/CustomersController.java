@@ -1,11 +1,9 @@
 package io.dt.web;
 
-import io.avaje.http.api.Controller;
-import io.avaje.http.api.Get;
-import io.avaje.http.api.Path;
-import io.avaje.http.api.Post;
+import io.avaje.http.api.*;
 import io.dt.api.Customer;
 import io.dt.api.NewCustomer;
+import io.dt.api.StatusUpdate;
 import io.dt.service.api.ICustomersService;
 import jakarta.inject.Inject;
 
@@ -36,5 +34,10 @@ public class CustomersController {
     @Get("{id}")
     public Customer getById(UUID id) {
         return customersService.getById(id);
+    }
+
+    @Patch("{id}")
+    public void updateStatus(UUID id, StatusUpdate statusUpdate) {
+        customersService.updateStatus(id, statusUpdate.getStatus());
     }
 }
