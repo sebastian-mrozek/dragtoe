@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <createTable name="dnote" identityType="external" pkName="pk_dnote">
+            <column name="id" type="uuid" primaryKey="true" identity="true"/>
+            <column name="customer_id" type="uuid"/>
+            <column name="text" type="varchar"/>
+        </createTable>
+        <createIndex indexName="ix_dnote_customer_id" tableName="dnote" columns="customer_id"/>
+    </changeSet>
+</migration>
