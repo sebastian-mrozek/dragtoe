@@ -1,0 +1,22 @@
+services:
+
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+
+  webapp:
+    image: softwaremrozek/dragtoe:latest
+    ports:
+      - 7000:7000
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    links:
+      - db
+
+volumes:
+  db-data:

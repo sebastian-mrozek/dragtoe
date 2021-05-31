@@ -3,7 +3,9 @@ TODO
 - craft docker-compose with the app and postgres, configure
 - create unit tests for notes service API
 - create integration tests for notes service API
+- implement notes api
 - add versioning for notes (maybe updated timestamp?) to showcase model upgrade - use it for optimistic locking when updating notes
+- enable filtering on 'getAll'
 - write mapper tests
 - review logging
 - review configuration
