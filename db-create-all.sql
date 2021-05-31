@@ -14,6 +14,7 @@ create table dnote (
   id                            uuid not null,
   customer_id                   uuid,
   text                          varchar(255),
+  version                       bigint default 1 not null,
   constraint pk_dnote primary key (id)
 );
 

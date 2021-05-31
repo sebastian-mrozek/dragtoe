@@ -1,6 +1,5 @@
 TODO
 =====
-- add versioning for notes (maybe updated timestamp?) to showcase model upgrade - use it for optimistic locking when updating notes
 - enable filtering on 'getAll'
 - write mapper tests
 - review logging

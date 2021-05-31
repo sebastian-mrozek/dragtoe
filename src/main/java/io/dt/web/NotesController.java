@@ -35,8 +35,8 @@ public class NotesController {
         notesService.delete(noteId);
     }
 
-    @Put("{noteId}")
-    public void updateNote(UUID noteId, NewNote newNote) {
-        notesService.update(noteId, newNote.getText());
+    @Put
+    public void updateNote(Note updatedNote) {
+        notesService.update(updatedNote);
     }
 }

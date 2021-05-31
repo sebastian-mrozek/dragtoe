@@ -66,7 +66,7 @@ public class NotesServiceTest {
     public void testUpdate() {
         Note expectedNote = service.add(customerId, randomText());
         String updatedText = randomText();
-        service.update(expectedNote.getId(), updatedText);
+        service.update(new Note(expectedNote.getId(), updatedText, expectedNote.getVersion()));
 
         Note actualNote = service.getAll(customerId).get(0);
         assertThat(actualNote.getId()).isEqualTo(expectedNote.getId());

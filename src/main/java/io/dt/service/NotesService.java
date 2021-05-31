@@ -31,10 +31,13 @@ public class NotesService implements INotesService {
     }
 
     @Override
-    public void update(UUID noteId, String text) {
-        new QDNote().id.eq(noteId)
+    public void update(Note updatedNote) {
+        new QDNote()
+                .id.eq(updatedNote.getId())
+                .version.eq(updatedNote.getVersion())
                 .asUpdate()
-                .set("text", text)
+                .set("text", updatedNote.getText())
+                .set("version", updatedNote.getVersion() + 1)
                 .update();
     }
 

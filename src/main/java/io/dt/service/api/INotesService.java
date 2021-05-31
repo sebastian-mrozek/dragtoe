@@ -11,7 +11,7 @@ public interface INotesService {
 
     Note add(UUID customerId, String text);
 
-    void update(UUID noteId, String text);
+    void update(Note updatedNote);
 
     void delete(UUID noteId);
 }
