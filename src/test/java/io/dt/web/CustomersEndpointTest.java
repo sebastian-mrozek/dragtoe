@@ -43,4 +43,16 @@ public class CustomersEndpointTest {
         TestUtil.assertResponse(getResponse, 200, "createCustomer_expected.json");
     }
 
+    @Test
+    public void testUpdateStatus() {
+        HttpResponse<String> postResponse = testClient.postResource("updateStatus_new-customer.json");
+        Customer newCustomer = JavalinJson.fromJson(postResponse.getBody(), Customer.class);
+
+        testClient.patch(newCustomer.getId().toString(), "updateStatus_patch.json");
+
+        HttpResponse<String> getResponse = testClient.get(newCustomer.getId().toString());
+        TestUtil.assertResponse(getResponse, 200, "updateStatus_expected.json");
+
+    }
+
 }

@@ -21,11 +21,7 @@ public class TestClient {
         return Unirest.get(apiBaseUrl + path).asString();
     }
 
-    public HttpResponse<String> patch(String path) {
-        return Unirest.patch(apiBaseUrl + path).asString();
-    }
-
-    public HttpResponse<String> patchResource(String path, String resourceName) {
+    public HttpResponse<String> patch(String path, String resourceName) {
         String content = Json.readResource("/" + resourceName);
         return Unirest.patch(apiBaseUrl + path).body(content).asString();
     }
