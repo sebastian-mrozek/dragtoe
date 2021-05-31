@@ -1,6 +1,5 @@
 TODO
 =====
-- craft docker-compose with the app and postgres, configure
 - create unit tests for notes service API
 - create integration tests for notes service API
 - implement notes api
