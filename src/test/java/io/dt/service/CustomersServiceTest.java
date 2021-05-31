@@ -60,10 +60,10 @@ public class CustomersServiceTest {
     @ParameterizedTest
     @EnumSource(Status.class)
     public void testStatusUpdate(Status status) {
-        Customer customer = service.add(new NewCustomer("customer " + Math.random(), mockContactDetails()));
-        service.updateStatus(customer.getId(), status);
-        service.getById(customer.getId());
-        assertThat(customer.getStatus()).isEqualTo(status);
+        Customer newCustomer = service.add(new NewCustomer("customer " + Math.random(), mockContactDetails()));
+        service.updateStatus(newCustomer.getId(), status);
+        Customer updatedCustomer = service.getById(newCustomer.getId());
+        assertThat(updatedCustomer.getStatus()).isEqualTo(status);
     }
 
 

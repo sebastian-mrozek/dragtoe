@@ -51,6 +51,10 @@ public class CustomersService implements ICustomersService {
 
     @Override
     final public void updateStatus(UUID id, Status status) {
-
+        new QDCustomer()
+                .id.eq(id)
+                .asUpdate()
+                .set("status", status)
+                .update();
     }
 }
