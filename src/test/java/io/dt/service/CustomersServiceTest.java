@@ -6,6 +6,9 @@ import io.dt.api.NewCustomer;
 import io.dt.api.Status;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -52,6 +55,15 @@ public class CustomersServiceTest {
         assertThat(actual).describedAs("customers list").isNotNull();
         assertThat(actual.size()).describedAs("customers count").isEqualTo(2);
         assertThat(actual).containsExactlyInAnyOrder(tom, andy);
+    }
+
+    @ParameterizedTest
+    @EnumSource(Status.class)
+    public void testStatusUpdate(Status status) {
+        Customer customer = service.add(new NewCustomer("customer " + Math.random(), mockContactDetails()));
+        service.updateStatus(customer.getId(), status);
+        service.getById(customer.getId());
+        assertThat(customer.getStatus()).isEqualTo(status);
     }
 
 

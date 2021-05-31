@@ -30,6 +30,7 @@ dependencies {
     implementation "io.avaje:avaje-http-api:$v_avaje_http"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.0'
     testImplementation "org.assertj:assertj-core:3.19.0"
     testImplementation "io.ebean:ebean-test:$v_ebean"
     testImplementation "com.konghq:unirest-java:3.11.09"
