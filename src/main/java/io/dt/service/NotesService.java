@@ -25,7 +25,7 @@ public class NotesService implements INotesService {
 
     @Override
     public Note add(UUID customerId, String text) {
-        DNote dNote = new DNote(null, customerId, text, 1);
+        var dNote = new DNote(null, customerId, text, 1);
         dNote.save();
         return mapper.dbToApi(dNote);
     }

@@ -20,7 +20,7 @@ public class CustomersService implements ICustomersService {
 
     @Override
     final public Customer add(NewCustomer newCustomer) {
-        DCustomer dCustomer = new DCustomer(
+        var dCustomer = new DCustomer(
                 null,
                 newCustomer.getNickName(),
                 mapper.apiToDb(newCustomer.getContactDetails()),
@@ -32,7 +32,7 @@ public class CustomersService implements ICustomersService {
 
     @Override
     final public List<Customer> getAll(String nameFilter, String addressFilter) {
-        QDCustomer customerQuery = new QDCustomer()
+        var customerQuery = new QDCustomer()
                 .fetch("contactDetails");
 
         if (nameFilter != null && !nameFilter.isEmpty()) {
@@ -52,7 +52,7 @@ public class CustomersService implements ICustomersService {
 
     @Override
     final public Customer getById(UUID id) {
-        DCustomer customer = new QDCustomer().id.eq(id).findOne();
+        var customer = new QDCustomer().id.eq(id).findOne();
         if (customer == null) {
             return null;
         }
