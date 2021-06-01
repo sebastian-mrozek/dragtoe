@@ -23,7 +23,7 @@ Once the app has been built, it can be run using docker:
 cd docker
 docker compose up
 ```
-The above method launches to containers, one with the web app and one with postgres and is configured to use the postgres for persistence.
+The above method launches two containers, one with the web app and one with postgres and is configured to use the postgres for persistence.
 
 Since dockerized application is easier to test with external dependencies (like postgres)
 I haven't included ability to create a fat Jar but it can be done easily by importing 'om.github.johnrengelman.shadow' plugin.
@@ -114,7 +114,7 @@ Other comments
 If I had more time or what could be done differently
 -----
 The following might be applicable depending on project size and domain complexity. They might not provide useful for smaller domains that don't change often.
-- Complete logging, not all classes have logging but the ones having it should be enough as an example
+- Complete logging, not all classes have logging but the ones having it (`CustomersService` class and exception handlers) should be enough as an example
 - Better exception handling instead of a fairly broad-stroke persistence exception mapping to http status codes - would depend on use cases
 - Use Lombok for API classes to reduce boilerplate code (getters, setters, constructors etc).
 - Define REST API using OpenAPI and generate API classes and endpoints (can generate java rest client etc).
