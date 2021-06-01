@@ -6,6 +6,7 @@ import io.dt.service.api.INotesService;
 import io.dt.service.db.DNote;
 import io.dt.service.db.query.QDNote;
 
+import javax.persistence.OptimisticLockException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,13 +33,16 @@ public class NotesService implements INotesService {
 
     @Override
     public void update(Note updatedNote) {
-        new QDNote()
+        int updatedRecordsCount = new QDNote()
                 .id.eq(updatedNote.getId())
                 .version.eq(updatedNote.getVersion())
                 .asUpdate()
                 .set("text", updatedNote.getText())
                 .set("version", updatedNote.getVersion() + 1)
                 .update();
+        if (updatedRecordsCount == 0) {
+            throw new OptimisticLockException();
+        }
     }
 
     @Override

@@ -4,6 +4,8 @@ import io.avaje.http.api.WebRoutes;
 import io.avaje.inject.SystemContext;
 import io.javalin.Javalin;
 
+import javax.persistence.OptimisticLockException;
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 public class Application {
@@ -16,8 +18,13 @@ public class Application {
 
     public Application() {
         server = Javalin.create();
+
         List<WebRoutes> webRoutes = SystemContext.context().getBeans(WebRoutes.class);
         server.routes(() -> webRoutes.forEach(WebRoutes::registerRoutes));
+
+        registerExceptionMapper(OptimisticLockException.class, 400, "Update out of date");
+        registerExceptionMapper(PersistenceException.class, 500, "Database error");
+        registerExceptionMapper(Exception.class, 500, "Application error");
     }
 
     public void start() {
@@ -30,5 +37,9 @@ public class Application {
 
     public void stop() {
         server.stop();
+    }
+
+    private <T extends Exception> void registerExceptionMapper(Class<T> exceptionClass, int statusCode, String message) {
+        server.exception(exceptionClass, ExceptionHandlerFactory.createHandler(exceptionClass, statusCode, message));
     }
 }
