@@ -8,6 +8,8 @@ import io.dt.mapper.CustomerMapper;
 import io.dt.service.api.ICustomersService;
 import io.dt.service.db.DCustomer;
 import io.dt.service.db.query.QDCustomer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 
 public class CustomersService implements ICustomersService {
 
+    public static final Logger LOG = LoggerFactory.getLogger(CustomersService.class);
     CustomerMapper mapper = new CustomerMapper();
 
     @Override
@@ -27,6 +30,8 @@ public class CustomersService implements ICustomersService {
                 new Date(),
                 Status.PROSPECTIVE);
         dCustomer.save();
+
+        LOG.info("Added new customer: {}", newCustomer);
         return mapper.dbToApi(dCustomer);
     }
 
@@ -43,19 +48,26 @@ public class CustomersService implements ICustomersService {
             customerQuery = customerQuery.contactDetails.address.contains(addressFilter);
         }
 
-        return customerQuery
+
+        List<Customer> list = customerQuery
                 .findList()
                 .stream()
                 .map(mapper::dbToApi)
                 .collect(Collectors.toList());
+
+        LOG.trace("Fetched {} customers with, address filter: {}, name filer: {}", list.size(), addressFilter, nameFilter);
+        return list;
     }
 
     @Override
     final public Customer getById(UUID id) {
         var customer = new QDCustomer().id.eq(id).findOne();
         if (customer == null) {
+            LOG.warn("No customer found with id: {}", id);
             return null;
         }
+
+        LOG.trace("Retrieved customer by id: {}", id);
         return mapper.dbToApi(customer);
     }
 
@@ -66,5 +78,6 @@ public class CustomersService implements ICustomersService {
                 .asUpdate()
                 .set("status", status)
                 .update();
+        LOG.trace("Updated customer (id: {}) status to {}", id, status);
     }
 }

@@ -11,8 +11,11 @@ public class ExceptionHandlerFactory {
     public static final Logger LOG = LoggerFactory.getLogger(ExceptionHandler.class);
 
     public static <T extends Exception> ExceptionHandler<T> createHandler(Class<T> clazz, int code, String message) {
+
         return (@NotNull T exception, @NotNull Context ctx) -> {
-            LOG.info(exception.getMessage(), exception);
+
+            LOG.warn(exception.getMessage(), exception);
+
             ctx.status(code);
             ctx.result(message);
         };

@@ -60,4 +60,15 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(id, nickName, contactDetails, creationDateTime, status);
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                ", contactDetails=" + contactDetails +
+                ", creationDateTime=" + creationDateTime +
+                ", status=" + status +
+                '}';
+    }
 }

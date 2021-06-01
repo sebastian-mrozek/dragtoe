@@ -44,4 +44,13 @@ public class ContactDetails {
     public int hashCode() {
         return Objects.hash(address, phoneNumber, twitterHandle);
     }
+
+    @Override
+    public String toString() {
+        return "ContactDetails{" +
+                "address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", twitterHandle='" + twitterHandle + '\'' +
+                '}';
+    }
 }
