@@ -9,7 +9,7 @@ Build & Run
 
 Building the project
 -----
-Project has been built with Java 11 and gradle, so it can be built by either running the following command:
+Project has been built with Java 11 and gradle, so it can be built (including docker image) by either running the following command:
 ```
 ./gradlew clean build jibDockerBuild
 
@@ -23,10 +23,57 @@ Once the app has been built, it can be run using docker:
 cd docker
 docker compose up
 ```
+The above method launches to containers, one with the web app and one with postgres and is configured to use the postgres for persistence.
 
 Since dockerized application is easier to test with external dependencies (like postgres)
 I haven't included ability to create a fat Jar but it can be done easily by importing 'om.github.johnrengelman.shadow' plugin.
-Application can obviously be run from within the IDE, simply execute the `Application` class.
+Application can obviously be run from within the IDE, simply execute the `Application` class - default persistence configuration in that case is an H2 database, the data will be stored in `db/dragtoe.mv.db` file.
+
+Calling the API
+-----
+Once the application starts, the ReST API will be available on port 7000.
+Below are sample curl commands to interact with the service:
+
+Create new customer:
+```
+curl -X POST -d '{"nickName":"Patrick","contactDetails":{"address":"somewhere","phoneNumber":"0212333","twitterHandle":"@patrickThePresident"}}' http://localhost:7000/customers
+```
+The call will return newly created object, its ID is important for further interactions (below commands use {ID} as a placeholder)
+
+List customers:
+```
+curl http://localhost:7000/customers
+```
+
+List customers with a filter:
+```
+curl http://localhost:7000/customers?addressFilter=Auckland
+curl http://localhost:7000/customers?addressFilter=some
+```
+
+Update customer status:
+```
+curl -X PATCH -d '{"status":"CURRENT"}' http://localhost:7000/customers/{ID}
+```
+
+Add a note:
+```
+curl -X POST -d '{"text":"My important note"}' http://localhost:7000/customers/{ID}/notes
+```
+
+List notes:
+curl http://localhost:7000/customers/{ID}/notes
+
+Delete a note: (needs a note id as well, from previous curl command outputs)
+```
+curl -X DELETE http://localhost:7000/customers/{ID}/notes/{NOTE_ID} 
+```
+
+Update a note: (beware of optimistic locking, first example will fail with 400 status code)
+```
+curl -X PUT -d '{"id":"{NOTE_ID}","text":"My updated note","version":1234}' http://localhost:7000/customers/{ID}/notes
+curl -X PUT -d '{"id":"{NOTE_ID}","text":"My updated note","version":1}' http://localhost:7000/customers/{ID}/notes
+```
 
 Comments
 =====
@@ -67,6 +114,8 @@ Other comments
 If I had more time or what could be done differently
 -----
 The following might be applicable depending on project size and domain complexity. They might not provide useful for smaller domains that don't change often.
+- Complete logging, not all classes have logging but the ones having it should be enough as an example
+- Better exception handling instead of a fairly broad-stroke persistence exception mapping to http status codes - would depend on use cases
 - Use Lombok for API classes to reduce boilerplate code (getters, setters, constructors etc).
 - Define REST API using OpenAPI and generate API classes and endpoints (can generate java rest client etc).
 - Use MapStruct for mapping
@@ -77,6 +126,4 @@ TODO
 =====
 - write mapper tests
 - review logging
-- review configuration
 - add metrics - explain options
-
