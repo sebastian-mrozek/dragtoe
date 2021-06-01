@@ -22,8 +22,8 @@ public class CustomersController {
     }
 
     @Get
-    public List<Customer> getAll() {
-        return customersService.getAll();
+    public List<Customer> getAll(@QueryParam("nameFilter") String nameFilter, @QueryParam("addressFilter") String addressFilter) {
+        return customersService.getAll(nameFilter, addressFilter);
     }
 
     @Post

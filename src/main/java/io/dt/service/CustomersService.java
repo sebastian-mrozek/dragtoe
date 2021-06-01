@@ -31,9 +31,19 @@ public class CustomersService implements ICustomersService {
     }
 
     @Override
-    final public List<Customer> getAll() {
-        return new QDCustomer()
-                .fetch("contactDetails")
+    final public List<Customer> getAll(String nameFilter, String addressFilter) {
+        QDCustomer customerQuery = new QDCustomer()
+                .fetch("contactDetails");
+
+        if (nameFilter != null && !nameFilter.isEmpty()) {
+            customerQuery = customerQuery.nickName.contains(nameFilter);
+        }
+
+        if (addressFilter != null && !addressFilter.isEmpty()) {
+            customerQuery = customerQuery.contactDetails.address.contains(addressFilter);
+        }
+
+        return customerQuery
                 .findList()
                 .stream()
                 .map(mapper::dbToApi)

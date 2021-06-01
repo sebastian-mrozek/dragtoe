@@ -11,7 +11,11 @@ public interface ICustomersService {
 
     Customer add(NewCustomer newCustomer);
 
-    List<Customer> getAll();
+    default List<Customer> getAll() {
+        return getAll(null, null);
+    };
+
+    List<Customer> getAll(String nameFilter, String addressFilter);
 
     Customer getById(UUID id);
 
