@@ -44,10 +44,6 @@ test {
 
 jib {
     to {
-        image = "$DOCKER_HUB_USER/dragtoe"
-        auth {
-            username = DOCKER_HUB_USER
-            password = DOCKER_HUB_TOKEN
-        }
+        image = "dragtoe"
     }
 }

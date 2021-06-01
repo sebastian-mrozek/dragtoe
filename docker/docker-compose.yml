@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=postgres
 
   webapp:
-    image: softwaremrozek/dragtoe:latest
+    image: dragtoe
     ports:
       - 7000:7000
     environment:
